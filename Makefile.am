@@ -1,17 +1,17 @@
 SUBDIRS = .
-AM_CFLAGS = @CFLAG_EXTRAS@
+AM_CFLAGS = @CFLAG_EXTRAS@ -I/opt/homebrew/opt/cjson/include
 
 dist_man_MANS = man/vnstat.1 man/vnstat.conf.5 man/vnstatd.8 man/vnstati.1
 
 EXTRA_DIST = cfg examples UPGRADE CHANGES FAQ INSTALL_BSD UNINSTALL
 
 bin_PROGRAMS = vnstat
-vnstat_LDADD = -lcurl -lcjson -lpcap -lsqlite3 -lm
+vnstat_LDADD = -lcurl -lcjson -lpcap -lsqlite3 -lm -L/opt/homebrew/lib
+
 sbin_PROGRAMS = vnstatd
 if HAVE_LIBGD
 bin_PROGRAMS += vnstati
 endif
-vnstati_LDADD = @IMAGELIBS@
 
 vnstat_SOURCES = src/vnstat.c \
   src/vnstat_func.c src/vnstat_func.h \
